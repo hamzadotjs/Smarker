@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
+@import "./colors.css";
+
+* {
+  border-radius: 3px;
+  border: none;
+  border-shadow: var(--highlight);
+}
+
+body {
+  font-family: "Google Sans Code", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: var(--bg-dark);
+  color: var(--text);
+  font-size: 1.2rem;
+  margin: 150px;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--primary);
+  size: 30px;
+}
+
+.addbtn {
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 5px;
+  width: 150px;
+  height: 150px;
+  font-family: "Google Sans Code";
+  font-size: 2.5rem;
+  margin: 10px;
+}
+
+.delbtn {
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  font-family: "Google Sans Code";
+  font-size: 1.5rem;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+textarea {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Google Sans Code";
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.smarks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.smark textarea,
+.smark .preview {
+  width: 300px;
+  height: 200px;
+  box-sizing: border-box;
+  padding: 10px;
+  resize: none;
+  overflow: auto;
+}
