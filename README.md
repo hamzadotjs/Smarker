@@ -1,7 +1,7 @@
  <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.png">
-    <img alt="smarker" src="assets/logo-light.png" width="420">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-light.png">
+    <img alt="smarker" src="assets/logo-dark.png" width="420">
   </picture>
 </p>
 
