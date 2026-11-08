@@ -18,10 +18,10 @@ A **smark** is one block in smarker: a textbox with markdown parsing. Hit `+` to
 - Add and delete smarks
 - Markdown rendering for every smark ([react-markdown](https://github.com/remarkjs/react-markdown))
 - Desktop app via Tauri
+- Saved to ~/md
 
 ## Planned
 
-- Save to disk
 - Edit/preview toggle inside each smark
 
 ## Stack
@@ -30,7 +30,10 @@ A **smark** is one block in smarker: a textbox with markdown parsing. Hit `+` to
 - React
 - Vite
 
-## Getting started
+## Installing
+Just get the appimage from releases
+
+## Locally
 
 You'll need Node.js, Rust, and the [Tauri prerequisites](https://tauri.app/start/prerequisites/) for your OS.
 
@@ -47,16 +50,21 @@ To run just the frontend in the browser:
 npm run dev
 ```
 
-## Build
+### Build
 
 ```zsh
 npm run tauri build
 ```
 
-## Icons
+### Icons
 
 Generate all the app icons from a single 1024x1024 PNG:
 
 ```zsh
 npm run tauri icon ./app-icon.png
 ```
+
+## Credits:
+- @hamzadotjs : Most of the work
+- @neoapps-dev : Appimage + building advice, appimage.sh base too
+- claude : helped with debugging
