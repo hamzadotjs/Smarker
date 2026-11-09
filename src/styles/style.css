@@ -14,7 +14,7 @@ body {
   background-color: var(--bg-dark);
   color: var(--text);
   font-size: 1.2rem;
-  margin: 150px;
+  margin: 50px;
   text-decoration: none;
 }
 
@@ -29,10 +29,10 @@ h3 {
   background-color: var(--bg);
   color: var(--text);
   padding: 5px;
-  width: 150px;
-  height: 150px;
+  width: 50px;
+  height: 50px;
   font-family: "Google Sans Code";
-  font-size: 2.5rem;
+  font-size: 1.3rem;
   margin: 10px;
 }
 
@@ -49,30 +49,109 @@ h3 {
 }
 
 textarea {
-  background-color: var(--bg);
+  width: 100%;
+  height: 100%;
+  resize: none;
+  box-sizing: border-box;
+  padding: 10px;
+  font-family: "Google Sans Code", monospace;
+  font-size: 1rem;
+  background: var(--bg);
   color: var(--text);
-  font-family: "Google Sans Code";
+  border: 1px solid var(--border);
+  border-radius: 3px;
 }
 
-.head {
+.no-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+}
+
+.sidebar {
+  width: 250px;
+  min-width: 200px;
+  max-width: 300px;
+  background: var(--bg-dark);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.smarks {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.smark textarea,
-.smark .preview {
-  width: 300px;
-  height: 200px;
-  box-sizing: border-box;
   padding: 10px;
-  resize: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.file-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-muted);
+}
+
+.file-list li:hover {
+  background: var(--bg-light);
+}
+
+.file-list li.active {
+  background: var(--primary);
+  color: var(--bg-dark);
+  font-weight: bold;
+}
+
+.file-list li .delbtn {
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding: 2px 6px;
+  font-size: 0.9rem;
+}
+
+.file-list li:hover .delbtn {
+  opacity: 1;
+}
+
+.main-area {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.editor-section,
+.preview-section {
+  flex: 1;
+  padding: 20px;
   overflow: auto;
+  box-sizing: border-box;
+}
+
+.editor-section {
+  border-right: 1px solid var(--border);
 }

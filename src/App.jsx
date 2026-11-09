@@ -4,8 +4,17 @@ import { loadSmarks, saveSmark, deleteSmark } from "./storage";
 import "./styles/style.css"
 import "./styles/colors.css"
 
+function getDisplayName(smark) {
+  const firstLine = smark.text.split('\n')[0];
+  if (firstLine.startsWith('# ')) {
+    return firstLine.slice(2);
+  }
+  return smark.id;
+}
+
 function App(){
   const [smarks, setSmarks] = useState([]);
+  const [selectedSmarkId, setSelectedSmarkId] = useState(null);
   const timers = useRef({});
 
   useEffect(() => {
@@ -18,6 +27,7 @@ function App(){
     const newSmark = { id: String(Date.now()), text: "" };
     setSmarks(prev => [...prev, newSmark]);
     saveSmark(newSmark.id, "").catch(console.error);
+    setSelectedSmarkId(newSmark.id);
   }
   function UpdateSmark(id, text) {
     setSmarks(prev => prev.map(s => (s.id === id ? { ...s, text } : s)));
@@ -30,33 +40,61 @@ function App(){
   function DelSmark(id) {
     clearTimeout(timers.current[id]);
     setSmarks(prev => prev.filter(s => s.id !== id));
+    if (selectedSmarkId === id) {
+      setSelectedSmarkId(null);
+    }
     deleteSmark(id).catch(console.error);
   }
+  function handleFileSelect(smark) {
+    setSelectedSmarkId(smark.id);
+  }
 
- return (
-  <>
-    <div className="head">
-      <div className="title">
-        <h1>Smarker</h1>
-        <h6>A Markdown editor with no fuzz</h6>
-      </div>
-      <button className="addbtn" onClick={AddSmark}>+</button>
-    </div>
-    <div className="smarks">
-      {smarks.map(smark => (
-        <div className="smark" key={smark.id}>
-          <textarea
-            value={smark.text}
-            onChange={e => UpdateSmark(smark.id, e.target.value)}
-          />
-          <button className="delbtn" onClick={() => DelSmark(smark.id)}>x</button>
-          <div className="preview">
-            <ReactMarkdown>{smark.text}</ReactMarkdown>
-          </div>
-        </div>
-      ))}
-    </div>
-  </>
+  const selectedSmark = smarks.find(s => s.id === selectedSmarkId);
+
+  return (
+   <div className="app-container">
+     <div className="sidebar">
+       <div className="sidebar-header">
+         <h3>smarker</h3>
+         <button className="addbtn" onClick={AddSmark}>+</button>
+       </div>
+       
+       <ul className="file-list">
+         {smarks.map(smark => (
+           <li 
+             key={smark.id} 
+             onClick={() => handleFileSelect(smark)}
+             className={selectedSmarkId === smark.id ? 'active' : ''}
+           >
+             {getDisplayName(smark)}
+             <button 
+               className="delbtn sidebar-del" 
+               onClick={(e) => { e.stopPropagation(); DelSmark(smark.id); }}
+             >
+               x
+             </button>
+           </li>
+         ))}
+       </ul>
+     </div>
+     
+     <div className="main-area">
+       <div className="editor-section">
+         {selectedSmark ? (
+           <textarea 
+             value={selectedSmark.text} 
+             onChange={e => UpdateSmark(selectedSmark.id, e.target.value)}
+           />
+         ) : (
+           <div className="no-selection">Select a file to edit</div>
+         )}
+       </div>
+       
+       <div className="preview-section">
+         <ReactMarkdown>{selectedSmark?.text ?? ""}</ReactMarkdown>
+       </div>
+     </div>
+   </div>
 )
 }
 
